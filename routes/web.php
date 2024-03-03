@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
+use App\Http\Controllers\Admin\StatisticController as AdminStatisticController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Organizer\EventController as OrganizerEventController;
@@ -26,8 +27,10 @@ Route::prefix('Organizer')->group(function () {
 });
 
 Route::prefix('admin/dashboard')->group(function () {
-    Route::resource('/categories', AdminCategoryController::class)->names('admin.dashboard');
-    Route::resource('/users', AdminUserController::class)->names('admin.dashboard');
+    Route::resource('/categories', AdminCategoryController::class)->names('admin.dashboard.categories');
+    Route::resource('/events', AdminEventController::class)->names('admin.dashboard.events');
+    Route::resource('/users', AdminUserController::class)->names('admin.dashboard.users');
+    Route::get('/statistic', [AdminStatisticController::class, 'index'])->name('admin.dashboard.statistic');
 });
 
 Route::get('/dashboard', function () {

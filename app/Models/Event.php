@@ -12,10 +12,10 @@ class Event extends Model
     protected $fillable = ['title', 'description', 'date', 'price', 'location', 'duration', 'total_places', 'category_id', 'user_id'];
     
     public function user() {
-        $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
     
     public function category() {
-        $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class);
     }
 }

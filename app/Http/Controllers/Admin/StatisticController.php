@@ -3,19 +3,24 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Event;
-use App\Http\Requests\StoreEventRequest;
-use App\Http\Requests\UpdateEventRequest;
+use App\Models\Reservation;
+use App\Models\User;
+use Illuminate\Http\Request;
 
-class EventController extends Controller
+class StatisticController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $events = Event::all();
-        return view('Admin.Events.index', compact('events'));
+        $total_users = User::count();
+        $total_events = Event::count();
+        $total_categories = Category::count();
+        $total_reservations = Reservation::count();
+        return view('Admin.index', compact('total_users', 'total_events', 'total_categories', 'total_reservations'));
     }
 
     /**
@@ -29,7 +34,7 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreEventRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -37,7 +42,7 @@ class EventController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Event $event)
+    public function show(string $id)
     {
         //
     }
@@ -45,7 +50,7 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Event $event)
+    public function edit(string $id)
     {
         //
     }
@@ -53,7 +58,7 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateEventRequest $request, Event $event)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -61,9 +66,8 @@ class EventController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Event $event)
+    public function destroy(string $id)
     {
-        $event->delete();
-        return redirect()->back();
+        //
     }
 }

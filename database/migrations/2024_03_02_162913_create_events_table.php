@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('duration');
             $table->string('price');
             $table->integer('total_places');
-            $table->integer('total_reservations')->nullable();
+            $table->integer('total_reservations')->default(0);
             // user foreign key
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();

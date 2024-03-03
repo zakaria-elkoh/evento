@@ -14,7 +14,7 @@ class HomeController extends Controller
     public function index()
     {
 
-        $events = Event::all();
+        $events = Event::with('category')->get();   
         $categories = Category::all();
         return view('index', compact('events', 'categories'));
     }

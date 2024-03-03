@@ -33,11 +33,11 @@
                         <a href="{{route('register')}}" class="text-white hover:shadow-md bg-blue-700 focus:outline-none hover:bg-blue-800 focus:ring-4 font-bold rounded-full text-sm px-4 py-2.5 me-2 mb-2">Get Started</a>
                     </li>
                 @else
-                    {{-- @can('is_admin') 
+                    {{-- @can('is_admin')  --}}
                         <li>
-                            <a href="{{route('admin.dashboard.users')}}" class="text-white block mb-8 md:mb-0 py-2 px-3 rounded hover:text-blue-400 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Dashboard</a>
+                            <a href="{{route('admin.dashboard.statistic')}}" class="text-black block mb-8 md:mb-0 py-2 px-3 rounded hover:text-blue-400 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Ad Dashboard</a>
                         </li>
-                    @endcan --}}
+                    {{-- @endcan --}}
                     <li>
                         <a href="{{route('organizer.events.create')}}" class="text-black font-bold block py-2 px-3 rounded md:border-0 md:p-0">Add An Event</a>
                     </li>
