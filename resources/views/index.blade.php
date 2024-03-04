@@ -7,17 +7,23 @@
 
     <div class="max-w-screen-xl mx-auto flex justify-between mb-4">
         <h2 class="font-bold text-3xl text-gray-800">Up Coming Events:</h2>
-        <select id="default" class="bg-gray-50 border shadow hover:shadow-md cursor-pointer border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
-            <option selected>Choose a Category</option>  
-            @foreach ($categories as $category)
-                <option value="{{ $category->id }}">{{ $category->title }}</option>
-            @endforeach
-        </select>
+        <div class="flex items-start gap-5 flex-grow">
+            <div class="relative max-w-md shadow mx-auto mb-16 flex-grow">
+                <input type="search" id="search-input" class="block w-full p-4 ps-6 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500" placeholder="Search..." required />
+                <button type="submit" id="search-btn" name="search" class="text-white absolute end-2.5 bottom-2.5 shadow-sm bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+            </div>
+            <select id="select-category" class="bg-gray-50 border shadow hover:shadow-md cursor-pointer border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5">
+                <option value="all" selected>All</option>  
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                @endforeach
+            </select>
+        </div>
     </div>
     
-    <div class="max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="categories_wrapper my-16 relative max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @foreach ($events as $event)
-            <a href="#" class="bg-white relative overflow-hidden border border-gray-200 rounded-xl shadow hover:shadow-xl">
+            <a href="{{route('show.event', $event->id)}}" class="bg-white relative overflow-hidden border border-gray-200 rounded-xl shadow hover:shadow-xl">
                 <div>
                     <img class="rounded-t-lg" src="https://cdn.pixabay.com/photo/2016/11/23/15/48/audience-1853662_640.jpg" alt="" />
                 </div>
@@ -41,12 +47,11 @@
                         <span><i class="fa-solid fa-calendar"></i> {{ $event->date }}</span>
                         <span><i class="fa-solid fa-clock"></i> {{ $event->duration }} (Mins) </span>
                     </div>
-                    {{-- <p class="text-gray-500"></p> --}}
                     <p class="absolute top-8 left-[-58px] text-white font-bold bg-blue-600 px-20 py-2 rotate-[-45deg]">{{ $event->category->title }}</p>
                 </div>
             </a>
         @endforeach
-        
+             
         {{-- <a href="#" class="bg-white border border-gray-200 rounded-xl hover:shadow-md">
             <div>
                 <img class="rounded-t-lg" src="https://cdn.pixabay.com/photo/2016/11/23/15/48/audience-1853662_640.jpg" alt="" />
@@ -67,3 +72,5 @@
 
 
 @include('layouts.footer')
+
+<script src="js/index.js"></script>

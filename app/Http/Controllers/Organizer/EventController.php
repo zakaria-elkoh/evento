@@ -16,7 +16,8 @@ class EventController extends Controller
      */
     public function index()
     {
-        //
+        $events = Event::where('user_id', auth()->id())->get();
+        return view('Organizer.Events.index', compact('events'));
     }
 
     /**
@@ -62,7 +63,8 @@ class EventController extends Controller
      */
     public function edit(Event $event)
     {
-        //
+        $categories = Category::all();
+        return view('Organizer.Events.edit', compact('event', 'categories'));
     }
 
     /**
@@ -70,7 +72,18 @@ class EventController extends Controller
      */
     public function update(UpdateEventRequest $request, Event $event)
     {
-        //
+        $event->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'date' => $request->date,
+            'price' => $request->price,
+            'location' => $request->location,
+            'duration' => $request->duration,
+            'total_places' => $request->total_places,
+            'category_id' => $request->category_id
+        ]);
+
+        return redirect()->route('organizer.events.index');
     }
 
     /**
@@ -78,6 +91,7 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        $event->delete();
+        return redirect()->back();
     }
 }

@@ -21,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/events', [HomeController::class, 'search']);
+Route::get('/events/{event}', [HomeController::class, 'showEvent'])->name('show.event');
 
 Route::prefix('Organizer')->group(function () {
     Route::resource('/events', OrganizerEventController::class)->names('organizer.events');

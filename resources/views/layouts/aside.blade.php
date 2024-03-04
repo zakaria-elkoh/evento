@@ -51,7 +51,7 @@
                 </a>
             </li>
             <li class="rounded-lg">
-                <a href="" class="{{Route::is('rep.dash.company.index') ? 'bg-gray-700' : ''}} bg-gray-100 hover:bg-gray-300 hover:shadow flex items-center p-2 text-gray-900 rounded-lg group">
+                <a href="{{route('organizer.events.index')}}" class="{{Route::is('organizer.events.index') ? 'bg-gray-300' : 'bg-gray-100'}}  hover:bg-gray-300 hover:shadow flex items-center p-2 text-gray-900 rounded-lg group">
                     <span class="material-symbols-outlined">
                         scatter_plot
                     </span>
