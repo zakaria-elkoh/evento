@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
+use Illuminate\Http\Request;
 
 class EventController extends Controller
 {
@@ -16,6 +17,34 @@ class EventController extends Controller
     {
         $events = Event::all();
         return view('Admin.Events.index', compact('events'));
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function showEventsRequests()
+    {
+        $events = Event::where('statu', 'pending')->get();
+        return view('Admin.Events.events-requests', compact('events'));
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function acceptEvent(Event $event)
+    {
+        $event->update([
+            'statu' => 'Accepted'
+        ]);
+        return back()->with('Event Accepted with success!');
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function rejectEvent(Event $event)
+    {
+        $event->update([
+            'statu' => 'Rejected'
+        ]);
+        return back()->with('Event Rejected with success!');
     }
 
     /**

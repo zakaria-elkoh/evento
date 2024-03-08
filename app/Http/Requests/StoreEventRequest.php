@@ -22,7 +22,15 @@ class StoreEventRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|min:10|max:255',
+            'event_image' => 'required|image',
+            'description' => 'required|min:30',
+            'date' => 'required|date|after:today',
+            'price' => 'required|numeric',
+            'location' => 'required',
+            'duration' => 'required',
+            'total_places' => 'required|min:1|integer',
+            'category_id' => 'required|integer'
         ];
     }
 }

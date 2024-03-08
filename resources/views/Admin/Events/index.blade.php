@@ -11,11 +11,11 @@
 <div class="p-4 sm:ml-64">
     <div class="p-4 border-2 border-gray-300 border-dashed rounded-lg">
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <h1 class="font-bold text-2xl mb-5 ml-4 text-gray-700">All Users</h1> 
+            <h1 class="font-bold text-2xl mb-5 ml-4 text-gray-700">All Events:</h1> 
 
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
 
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400">
+                    <table style="table-layout: fixed" class="w-full text-sm text-left rtl:text-right text-gray-700 dark:text-gray-400">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-200">
                             <tr>
                                 <th scope="col" class="p-4">

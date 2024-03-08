@@ -45,14 +45,10 @@ class User extends Authenticatable
 
 
     public function roles() {
-        $this->belongsToMany(Role::class);
-    }
-
-    public function reservations() {
-        $this->belongsToMany(Reservation::class);
+        return $this->belongsToMany(Role::class);
     }
 
     public function events() {
-        $this->hasMany(Event::class);
+        return $this->belongsToMany(Event::class);
     }
 }

@@ -16,11 +16,13 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('location');
-            $table->date('date');
+            $table->dateTime('date');
             $table->string('duration');
             $table->string('price');
             $table->integer('total_places');
             $table->integer('total_reservations')->default(0);
+            $table->string('statu')->default('pending');
+            $table->integer('auto_accept');
             // user foreign key
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();

@@ -3,11 +3,13 @@ const selectCategory = document.querySelector('#select-category'),
       searchBtn = document.querySelector('#search-btn'),
       categoriesWrapper = document.querySelector('.categories_wrapper');
 
+
 searchBtn.addEventListener('click', () => {
     console.log(searchInput.value);
     fetchData();
 });
 
+// function that fetch the wanted events fron the back end
 const fetchData = () => {
 
     const url = 'http://127.0.0.1:8000/events?category=' + selectCategory.value + '&title=' + searchInput.value;
@@ -30,28 +32,27 @@ const fetchData = () => {
         return res.json();
     })
     .then( events => {
-        console.log(events);
         categoriesWrapper.innerHTML = '';
         events.forEach(event => {
 
             categoriesWrapper.innerHTML += `
             <a href="/events/${event.id}" class="bg-white relative overflow-hidden border border-gray-200 rounded-xl shadow hover:shadow-xl">
                 <div>
-                    <img class="rounded-t-lg" src="https://cdn.pixabay.com/photo/2016/11/23/15/48/audience-1853662_640.jpg" alt="" />
+                <img class="rounded-t-lg" src="${event.image}" alt="" />
                 </div>
                 <div class="p-5">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">${event.title}</h5>
                     <p class="mb-3 font-normal text-gray-700 ">${event.description}</p>
                     <p class="text-gray-500">
                         <i class="fa-solid fa-money-bill-1-wave"></i>
-                        <span class="text-2xl font-bold text-gray-900 ml-3">${event.price}</span>
+                        <span class="text-2xl font-bold text-gray-900 ml-3">${event.price}</span> DH
                     </p>
                     <div class="flex justify-between my-4 text-gray-500">
                         <span><i class="fa-solid fa-location-dot mr-1"></i>${event.location}</span>
                         <span class="{{(($event->total_places - $event->total_reservations) <= 0)? 'line-through text-red-500' : '' ;}}"><i class="fa-solid fa-chair"></i> ${event.total_places - event.total_reservations} Left</span>
                     </div>
                     <div class="flex justify-between my-4 text-gray-500">
-                        <span><i class="fa-solid fa-calendar"></i> ${event.total_places} </span>
+                        <span><i class="fa-solid fa-calendar"></i> ${event.date} </span>
                         <span><i class="fa-solid fa-clock"></i> ${event.duration} (Mins) </span>
                     </div>
                     <p class="absolute top-8 left-[-58px] text-white font-bold bg-blue-600 px-20 py-2 rotate-[-45deg]">${ event.category.title }</p>

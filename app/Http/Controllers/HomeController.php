@@ -13,7 +13,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $events = Event::with('category')->get();
+        $events = Event::where('statu', 'Accepted')
+            ->where('date', '>', now())
+            ->with('category')
+            ->paginate(9);
         $categories = Category::all();
         return view('index', compact('events', 'categories'));
     }
@@ -26,12 +29,18 @@ class HomeController extends Controller
         if ($category_id != 'all') {
             $events = Event::where('category_id', $category_id)
                 ->where('title', 'like', '%' . $title . '%')
+                ->where('date', '>', now())
                 ->with('category')
                 ->get();
         } else {
             $events = Event::with('category')
-                ->orwhere('title', 'like', '%' . $title . '%')
+                ->where('date', '>', now())
+                ->where('title', 'like', '%' . $title . '%')
                 ->get();
+        }
+
+        foreach ($events as $event) {
+            $event['image'] = $event->getFirstMediaUrl('images');
         }
 
         return response()->json($events);
@@ -39,6 +48,7 @@ class HomeController extends Controller
 
     public function showEvent(Event $event)
     {
-        return view('show-event', compact('event'));
+        $recent_eventes = Event::take(3)->get();
+        return view('show-event', compact('event', 'recent_eventes'));
     }
 }

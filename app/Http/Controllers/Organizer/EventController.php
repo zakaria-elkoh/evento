@@ -7,6 +7,8 @@ use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 use App\Http\Requests\UpdateEventRequest;
 use App\Models\Category;
+use App\Models\Reservation;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class EventController extends Controller
@@ -18,6 +20,35 @@ class EventController extends Controller
     {
         $events = Event::where('user_id', auth()->id())->get();
         return view('Organizer.Events.index', compact('events'));
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function acceptReservation(Reservation $reservation)
+    {
+        $reservation->update([
+            'statu' => 'Accepted'
+        ]);
+        return back()->with('Reservation Accepted with success!');
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function rejectReservation(Reservation $reservation)
+    {
+        $reservation->update([
+            'statu' => 'Rejected'
+        ]);
+        return back()->with('Reservation Rejected with success!');
+    }
+    /**
+     * Display a listing of the resource.
+     */
+    public function showEventRequests(Event $event)
+    {
+        $requests = Reservation::with('user')->where('event_id', $event->id)->where('statu', 'pending')->get();
+        // dd($requests);
+        return view('Organizer.Events.requests', compact('requests'));
     }
 
     /**
@@ -34,8 +65,7 @@ class EventController extends Controller
      */
     public function store(StoreEventRequest $request)
     {
-        // dd($request->all());
-        Event::create([
+        $event = Event::create([
             'title' => $request->title,
             'description' => $request->description,
             'date' => $request->date,
@@ -44,10 +74,13 @@ class EventController extends Controller
             'duration' => $request->duration,
             'total_places' => $request->total_places,
             'category_id' => $request->category_id,
+            'auto_accept' => $request->auto_accept,
             'user_id' => Auth::id()
         ]);
 
-        return redirect()->route('home');
+        $event->addMediaFromRequest('event_image')->toMediaCollection('images');
+
+        return redirect()->route('home')->with('message', 'The event was added with success!');
     }
 
     /**
