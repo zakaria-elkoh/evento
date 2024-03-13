@@ -4,8 +4,12 @@ const selectCategory = document.querySelector('#select-category'),
       categoriesWrapper = document.querySelector('.categories_wrapper');
 
 
+// rearch by title
 searchBtn.addEventListener('click', () => {
-    console.log(searchInput.value);
+    fetchData();
+});
+// rearch by the category
+selectCategory.addEventListener('change', () => {
     fetchData();
 });
 
@@ -33,39 +37,41 @@ const fetchData = () => {
     })
     .then( events => {
         categoriesWrapper.innerHTML = '';
-        events.forEach(event => {
-
+        if (Object.keys(events).length === 0) {
             categoriesWrapper.innerHTML += `
-            <a href="/events/${event.id}" class="bg-white relative overflow-hidden border border-gray-200 rounded-xl shadow hover:shadow-xl">
-                <div>
-                <img class="rounded-t-lg" src="${event.image}" alt="" />
-                </div>
-                <div class="p-5">
-                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">${event.title}</h5>
-                    <p class="mb-3 font-normal text-gray-700 ">${event.description}</p>
-                    <p class="text-gray-500">
-                        <i class="fa-solid fa-money-bill-1-wave"></i>
-                        <span class="text-2xl font-bold text-gray-900 ml-3">${event.price}</span> DH
-                    </p>
-                    <div class="flex justify-between my-4 text-gray-500">
-                        <span><i class="fa-solid fa-location-dot mr-1"></i>${event.location}</span>
-                        <span class="{{(($event->total_places - $event->total_reservations) <= 0)? 'line-through text-red-500' : '' ;}}"><i class="fa-solid fa-chair"></i> ${event.total_places - event.total_reservations} Left</span>
-                    </div>
-                    <div class="flex justify-between my-4 text-gray-500">
-                        <span><i class="fa-solid fa-calendar"></i> ${event.date} </span>
-                        <span><i class="fa-solid fa-clock"></i> ${event.duration} (Mins) </span>
-                    </div>
-                    <p class="absolute top-8 left-[-58px] text-white font-bold bg-blue-600 px-20 py-2 rotate-[-45deg]">${ event.category.title }</p>
-                </div>
-            </a>              
+                <h1></h1>
+                <h1 class="mb-4 text-2xl text-center font-extrabold leading-none tracking-tight text-gray-600 md:text-3xl lg:text-4xl">Not Found</h1>
             `
-        });
+        } else {
+            events.forEach(event => {
+                categoriesWrapper.innerHTML += `
+                    <a href="/events/${event.id}" class="bg-white relative overflow-hidden border border-gray-200 rounded-xl shadow hover:shadow-xl">
+                        <div>
+                        <img class="rounded-t-lg" src="${event.image}" alt="" />
+                        </div>
+                        <div class="p-5">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">${event.title}</h5>
+                            <p class="mb-3 font-normal text-gray-700 ">${event.description}</p>
+                            <p class="text-gray-500">
+                                <i class="fa-solid fa-money-bill-1-wave"></i>
+                                <span class="text-2xl font-bold text-gray-900 ml-3">${event.price}</span> DH
+                            </p>
+                            <div class="flex justify-between my-4 text-gray-500">
+                                <span><i class="fa-solid fa-location-dot mr-1"></i>${event.location}</span>
+                                <span class="{{(($event->total_places - $event->total_reservations) <= 0)? 'line-through text-red-500' : '' ;}}"><i class="fa-solid fa-chair"></i> ${event.total_places - event.total_reservations} Left</span>
+                            </div>
+                            <div class="flex justify-between my-4 text-gray-500">
+                                <span><i class="fa-solid fa-calendar"></i> ${event.date} </span>
+                                <span><i class="fa-solid fa-clock"></i> ${event.duration} (Mins) </span>
+                            </div>
+                            <p class="absolute top-8 left-[-58px] text-white font-bold bg-blue-600 px-20 py-2 rotate-[-45deg]">${ event.category.title }</p>
+                        </div>
+                    </a>              
+                `
+            });
+        }
     })
     .catch( err => {
         console.log(err);
     })
 };
-
-selectCategory.addEventListener('change', () => {
-    fetchData();
-});

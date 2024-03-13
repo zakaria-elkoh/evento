@@ -65,11 +65,11 @@
                                 <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap">
                                     {{ $category->id }}
                                 </th>
-                                <td class="px-6 py-4 font-medium">
+                                <td id="category-{{$category->id}}" class="px-6 py-4 font-medium">
                                     {{ $category->title }}
                                 </td>
                                 <td class="px-6 py-4">
-                                    <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <a href="#" id="{{$category->id}}" class="editBtn font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
                                     <form action="{{route('admin.dashboard.categories.destroy', $category->id)}}" method="POST">   
                                         @csrf
                                         @method('DELETE')
@@ -89,6 +89,7 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-<script src="js/alert.js"></script>
+<script src="{{asset('js/category.js')}}"></script>
+<script src="{{asset('js/alert.js')}}"></script>
 </body>
 </html>

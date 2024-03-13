@@ -80,7 +80,7 @@ class EventController extends Controller
 
         $event->addMediaFromRequest('event_image')->toMediaCollection('images');
 
-        return redirect()->route('home')->with('message', 'The event was added with success!');
+        return redirect()->route('home')->with('message', 'Added successfully, please wait for the admin to accept it!');
     }
 
     /**

@@ -14,12 +14,16 @@ class PdfController extends Controller
     public function generateTicket(Event $event)
     {
 
-        // $data = [
-        //     'name' => Auth::user()->name,
-        // ];
+        $data = [
+            'name' => Auth::user()->name,
+            'title' => $event->title,
+            'date' => $event->date,
+            'image' => $event->getFirstMediaUrl('images'),
+        ];
 
-        $pdf = PDF::loadView('ticket');
+        $pdf = PDF::loadView('ticket', compact('data'));
+
         return $pdf->download('ticket.pdf');
-        return view('ticket');
+        // return view('ticket', compact('data'));
     }
 }

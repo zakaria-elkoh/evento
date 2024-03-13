@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use Illuminate\Support\Facades\Gate;
 
 class CategoryController extends Controller
 {
@@ -14,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        Gate::authorize('isAdmin');
         $categories = Category::all();
         return view('Admin.Categories.index', compact('categories'));
     }
@@ -31,6 +33,7 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request)
     {
+        Gate::authorize('isAdmin');
         Category::create([
             'title' => $request->new_category
         ]);
@@ -57,9 +60,11 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateCategoryRequest $request, Category $category)
+    public function update($id)
     {
-        //
+
+
+        // return response()->json($request->all);
     }
 
     /**
@@ -67,6 +72,7 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
+        Gate::authorize('isAdmin');
         $category->delete();
         return redirect()->back()->with('message', 'Category deleted with success');
     }

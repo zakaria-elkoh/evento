@@ -17,6 +17,20 @@ class UserController extends Controller
         return view('Admin.Users.index', compact('users'));
     }
 
+    public function ban(User $user)
+    {
+        if ($user->is_banned) {
+            $user->update([
+                'is_banned' => 0
+            ]);
+        } else {
+            $user->update([
+                'is_banned' => 1
+            ]);
+        }
+        return redirect()->back();
+    }
+
     /**
      * Show the form for creating a new resource.
      */

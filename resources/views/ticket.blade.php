@@ -15,12 +15,11 @@
                 <img style="object-fit: cover; height: 100%; width: 100%;" src="https://media.istockphoto.com/id/1146517111/photo/taj-mahal-mausoleum-in-agra.jpg?s=612x612&w=0&k=20&c=vcIjhwUrNyjoKbGbAQ5sOcEzDUgOfCsm9ySmJ8gNeRk=" alt="">
                 <div style="color: white; padding: 3.5rem 3.5rem 6rem; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.55);">
                     <div style="display: flex; justify-content: space-between;">
-                        <h1 style="font-size: 2.25rem; font-weight: bold;">Event <br> Ticket <br> Evento.</h1>
+                        <h1 style="font-size: 2.25rem; font-weight: bold;"> {{ $data['name'] }}</h1>
                         <h1 style="font-size: 2.25rem; font-weight: bold;">N° 2012</h1>
                     </div>
-                    <div style="font-size: 2.25rem; font-weight: bold; color: #f59e0b; margin-top: 4rem;">
-                        <h1>12/04</h1>
-                        <h1 style="font-size: 2.25rem; font-weight: bold;">10:00PM</h1>
+                    <div style="font-size: 2.25rem; font-weight: bold; color: #f59e0b; margin-top: 16rem;">
+                        <h1 style="font-size: 2.25rem; font-weight: bold;">{{ $data['date'] }}</h1>
                     </div>
                 </div>
             </div>

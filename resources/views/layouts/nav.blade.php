@@ -19,23 +19,15 @@
                 <li>
                     <a href="/" class="text-black font-bold block py-2 px-3 bg-blue-700 hover:text-blue-400 rounded md:bg-transparent md:p-0 " >Home</a>
                 </li>
-                @can('is_admin_or_partner')
-                    <li>
-                        <a href="{{route('projects.create')}}" class="text-black block mb-8 md:mb-0 py-2 px-3 rounded hover:text-blue-400 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Add a Project</a>
-                    </li>
-                @endcan
-                {{-- check if the user is not logged in --}}
-                @if (!Auth::check())
-                    <li>
-                        <a href="{{route('login')}}" class="text-black font-bold block py-2 px-3 rounded md:border-0 md:p-0">Sign In</a>
-                    </li>
-                    <li>
-                        <a href="{{route('register')}}" class="text-white hover:shadow-md bg-blue-700 focus:outline-none hover:bg-blue-800 focus:ring-4 font-bold rounded-full text-sm px-4 py-2.5 me-2 mb-2">Get Started</a>
-                    </li>
-                @else
+                @auth
+                    @can('isUser') 
+                        <li>
+                            <a href="{{route('my.reservations')}}" class="text-black block mb-8 md:mb-0 py-2 px-3 rounded hover:text-blue-400 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">My Reservations</a>
+                        </li>
+                    @endcan
                     @can('isOrganizerOrAdmin') 
                         <li>
-                            <a href="{{route('admin.dashboard.statistic')}}" class="text-black block mb-8 md:mb-0 py-2 px-3 rounded hover:text-blue-400 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Ad Dashboard</a>
+                            <a href="{{route('admin.dashboard.statistic')}}" class="text-black block mb-8 md:mb-0 py-2 px-3 rounded hover:text-blue-400 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:p-0">Dashboard</a>
                         </li>
                     @endcan
                     @can('isOrganizer')
@@ -49,7 +41,16 @@
                             <button class="text-white hover:shadow-md bg-red-700 focus:outline-none hover:bg-red-800  font-bold rounded-full text-sm px-4 py-2.5">Log out</button>
                         </form>
                     </li>
-                @endif
+                @endauth
+                @guest
+                    <li>
+                        <a href="{{route('login')}}" class="text-black font-bold block py-2 px-3 rounded md:border-0 md:p-0">Sign In</a>
+                    </li>
+                    <li>
+                        <a href="{{route('register')}}" class="text-white hover:shadow-md bg-blue-700 focus:outline-none hover:bg-blue-800 focus:ring-4 font-bold rounded-full text-sm px-4 py-2.5 me-2 mb-2">Get Started</a>
+                    </li>
+                @endguest
+
             </ul>
         </div>
     </div>

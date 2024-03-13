@@ -20,6 +20,7 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'is_banned',
         'password',
     ];
 
@@ -44,11 +45,13 @@ class User extends Authenticatable
     ];
 
 
-    public function roles() {
+    public function roles()
+    {
         return $this->belongsToMany(Role::class);
     }
 
-    public function events() {
+    public function events()
+    {
         return $this->belongsToMany(Event::class);
     }
 }

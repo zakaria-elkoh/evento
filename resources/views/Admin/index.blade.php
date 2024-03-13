@@ -40,28 +40,28 @@
                     <!-- statistic of the Events -->
                     <div class="bg-white p-6 shadow-lg border text-gray-800 rounded-2xl text-center">
                         <h1 class="inline mb-4 text-5xl font-extrabold leading-none tracking-tight">{{ $total_reservations }}</h1>
-                        <span>Reservation</span>
+                        <span>Reservations</span>
                         <a href="#" class="block w-fit ml-auto mt-6 hover:underline">See All Reservations</a>
                     </div>
                     <!-- statistic of the wikis -->
                     <div class="bg-white p-6 shadow-lg border text-gray-800 rounded-2xl text-center">
                         <h1 class="inline mb-4 text-5xl font-extrabold leading-none tracking-tight">{{ $total_events }}</h1>
-                        <span>Event</span>
+                        <span>Events</span>
                         <a href="#" class="block w-fit ml-auto mt-6 hover:underline">See All Events</a>
                     </div>
                     <!-- statistic of the users -->
                     <div class="bg-white p-6 shadow-lg border text-gray-800 rounded-2xl text-center">
                         <h1 class="inline mb-4 text-5xl font-extrabold leading-none tracking-tight">{{ $total_users }}</h1>
-                        <span>User</span>
+                        <span>Users</span>
                         <a href="#" class="block w-fit ml-auto mt-6 hover:underline">See All Users</a>
                     </div>
                     
                     <!-- statistic of the tags -->
-                    <div class="bg-white p-6 shadow-lg border text-gray-800 rounded-2xl text-center">
+                    {{-- <div class="bg-white p-6 shadow-lg border text-gray-800 rounded-2xl text-center">
                         <h1 class="inline mb-4 text-5xl font-extrabold leading-none tracking-tight">55</h1>
                         <span>Tags</span>
                         <a href="#" class="block w-fit ml-auto mt-6 hover:underline">See All Tags</a>
-                    </div>
+                    </div> --}}
                     <!-- statistic of the categories -->
                     <div class="bg-white p-6 shadow-lg border text-gray-800 rounded-2xl text-center">
                         <h1 class="inline mb-4 text-5xl font-extrabold leading-none tracking-tight">{{ $total_categories }}</h1>

@@ -3,9 +3,42 @@
 
 {{-- @dd(Auth::user()->roles) --}}
 
+<div class="relative mt-20 flex flex-col-reverse py-16 lg:pt-0 lg:flex-col lg:pb-0">
+    <div class="inset-y-0 top-0 right-0 z-0 w-full max-w-xl px-4 mx-auto md:px-0 lg:pr-0 lg:mb-0 lg:mx-0 lg:w-7/12 lg:max-w-full lg:absolute xl:px-0">
+      <svg class="absolute left-0 hidden h-full text-white transform -translate-x-1/2 lg:block" viewBox="0 0 100 100" fill="currentColor" preserveAspectRatio="none slice">
+        <path d="M50 0H100L50 100H0L50 0Z"></path>
+      </svg>
+      <img
+        class="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
+        src="imgs/event.jpg"
+        alt="img"
+      />
+    </div>
+    <div class="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl">
+      <div class="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
+        <p class="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+          Event new
+        </p>
+        <h2 class="mb-5 font-sans text-3xl font-bold tracking-tight text-gray-900 sm:text-6xl sm:leading-none">
+          Everything you<br class="hidden md:block" />
+          can imagine
+          <span class="inline-block text-deep-purple-accent-400">is real</span>
+        </h2>
+        <p class="pr-5 mb-5 lg:pb-10 text-base text-gray-700 md:text-lg">
+          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
+        </p>
+        @guest
+            <div class="flex items-center">
+                <a href="{{route('register')}}" class="text-white hover:shadow-lg bg-blue-700 focus:outline-none hover:bg-blue-800 focus:ring-4 font-bold rounded-full text-sm px-8 py-3 me-2 mr-8">Get Started</a>
+            </div>
+        @endguest
+      </div>
+    </div>
+</div>
 
-<section class="py-20 px-3 md:px-6 mt-20">
 
+
+<section class="py-20 px-3 md:px-6">
     
     {{-- message alert --}}
     @if(Session::has('message'))
@@ -26,6 +59,7 @@
         </div>
     @endif
 
+    {{-- show categories --}}
     <div class="max-w-screen-xl mx-auto flex justify-between mb-4">
         <h2 class="font-bold text-3xl text-gray-800">Up Coming Events:</h2>
         <div class="flex items-start gap-5 flex-grow">
@@ -41,7 +75,8 @@
             </select>
         </div>
     </div>
-    
+
+    {{-- show events --}}
     <div class="categories_wrapper my-16 relative max-w-screen-xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         @forelse ($events as $event)
             <a href="{{route('show.event', $event->id)}}" class="bg-white relative overflow-hidden border border-gray-200 rounded-xl shadow hover:shadow-xl">
@@ -65,7 +100,7 @@
                         <span class="{{(($event->total_places - $event->total_reservations) <= 0)? 'line-through text-red-500' : '' ;}}"><i class="fa-solid fa-chair"></i> {{ $event->total_places - $event->total_reservations }} Left</span>
                     </div>
                     <div class="flex justify-between my-4 text-gray-500">
-                        <span><i class="fa-solid fa-calendar"></i> {{ $event->date }}</span>
+                        <span><i class="fa-solid fa-calendar"></i> {{ \Carbon\Carbon::parse($event->date)->format('F j, Y H:i') }}</span>
                         <span><i class="fa-solid fa-clock"></i> {{ $event->duration }} (Mins) </span>
                     </div>
                     <p class="absolute top-8 left-[-58px] text-white font-bold bg-blue-600 px-20 py-2 rotate-[-45deg]">{{ $event->category->title }}</p>

@@ -6,3 +6,4 @@ setTimeout(() => {
         el.classList.add('hidden');
     });
 }, 7000);
+

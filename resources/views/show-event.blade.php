@@ -104,8 +104,12 @@
                 @if ($event->total_places == $event->total_reservations)
                     <a class="text-white cursor-not-allowed block bg-red-700 hover:bg-red-800 text-center focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 mt-6 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Souled out</a>  
                 @else
-                    @if (Auth::user()->events->contains($event))
-                        <a href="{{ route('user.events.reserve', $event->id) }}" class="text-white text-center block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Already Booked</a>  
+                    @if (Auth::user() && Auth::user()->events->contains($event))
+                        @if ($accepted)
+                            <a href="{{ route('ticket', $event->id) }}" class="text-white text-center block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Get ticket</a>  
+                        @else
+                            <a href="{{ route('user.events.reserve', $event->id) }}" class="text-white text-center block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Already Booked</a>  
+                        @endif
                     @else
                         <a href="{{ route('user.events.reserve', $event->id) }}" class="text-white text-center block bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 mt-6 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Book Now</a>
                     @endif
